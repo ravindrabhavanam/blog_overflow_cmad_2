@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color:   #2980b9;
+    clear: left;
+    text-align: center;
+}
+nav {
+    float: right;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul a {
+    text-decoration: none;
+}
+  
+</style>
+<meta charset="UTF-8">
+<title>BLOGGING </title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+$(document)
+.ready(
+		function () {
+	   document.getElementById("Register").onclick = function(){
+		   $("input").after(" Text marked!");
+			var password = $("#password").val();
+			var email = $("#email")
+					.val();
+			var interestCategory = $("#interestCategory")
+			.val();
+			var data = {
+				emailId : email,
+				password : password,
+				interestCategory :interestCategory 
+			};
+			$
+					.ajax({
+						url : 'http://localhost:8080/blog-overflow/online/account/register',
+						type : 'post',
+						contentType : 'application/json',
+						success : function(response) {
+							$('#response').load('index.html');
+							$("body").html(response + "  successfully logged in") ;
+				
+							
+
+						},
+						data : JSON.stringify(data)
+					});
+	   }
+	}
+)
+</script>
+<link rel='stylesheet' href='C:\glarimy\workspace\blogging\src\main\webapp\WEB-INF\blog.css'>
+<link>
+</head>
+<body>
+	<header>
+   <h1>Blogging</h1>
+</header>
+	
+	<hr />
+	<div id='openForm'>
+		<nav>
+ <nav id = nav1>
+   Email:<br>
+  <input type="text" id='email' name="email" >
+  <br>
+  Password:<br>
+  <input type="text" id='password' name="password" >
+  <br>
+  Category:<br>
+  <input type="text" id='interestCategory' name="interestCategory" >
+  <br>
+  <br>
+  <input type="submit" value="Login">
+   <input type="submit" id="Register" value="Register">
+</nav>
+</nav>
+	</div>
+</body>
+</html>

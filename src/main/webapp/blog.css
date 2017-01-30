@@ -1,0 +1,122 @@
+
+#registerForm{
+    display:none;
+}
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color:   #2980b9;
+    clear: left;
+    text-align: center;
+}
+.login_page {
+	float: right;
+  padding: 10px 15px 25px 15px;
+  border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  width: 300px;
+	 margin-right: 5%;
+	margin-left:auto; 
+}
+.register_page {
+	float: right;
+  padding: 10px 15px 25px 15px;
+  border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  width: 340px;
+	 margin-right: 5%;
+	margin-left:auto; 
+}
+nav {
+	font-size: 20px;
+	color: #2980b9;
+    float: right;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+    display:block;
+}
+nav td {
+	font-size: 20px;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul a {
+    text-decoration: none;
+}
+ nav a {
+  display:block;
+  float : left;
+  text-decoration:none;
+  padding:0 0.5em;
+  
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+
+.button {
+  padding: 6px 15px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #2980b9;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px #999;
+}
+
+.button:hover {background-color: #333}
+
+.button:active {
+  background-color: #111;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.msgs{
+	float: right;
+	display:none;
+	width: 340px;
+	height: 500px;
+	padding: 5px 5px 5px 5px;
+	font-size: 10px;
+	overflow: hidden;
+	overflow-y: auto;
+	border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  margin-right: auto;
+	margin-left:auto; 
+}
