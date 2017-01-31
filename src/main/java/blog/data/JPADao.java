@@ -40,6 +40,10 @@ public class JPADao implements DAO {
 				.setParameter("value1", email).getSingleResult();*/
 			user.setInterestCategory(em.createQuery("SELECT user.interestCategory FROM UserData user WHERE user.emailId = :value1",String.class)
 					.setParameter("value1", email).getSingleResult());
+			user.setFirstName(em.createQuery("SELECT user.firstName FROM UserData user WHERE user.emailId = :value1",String.class)
+					.setParameter("value1", email).getSingleResult());
+			user.setLastName(em.createQuery("SELECT user.lastName FROM UserData user WHERE user.emailId = :value1",String.class)
+					.setParameter("value1", email).getSingleResult());
 			em.close();
 			return user;
 		}

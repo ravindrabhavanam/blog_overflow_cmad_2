@@ -1,5 +1,5 @@
 
-#registerForm,#blogForm{
+#registerForm,#blogForm,#chatForm,#greet_user,#LogoutTab,#HomeTab{
     display:none;
 }
 div.background {
@@ -14,8 +14,9 @@ header, footer {
     text-align: center;
 }
 textarea{ 
+	align: center;
 	width: 1200px;
- 	height: 120px;
+ 	height: 100px;
  }
 .blog_form {
 	opacity: 0.8;
@@ -26,7 +27,12 @@ textarea{
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   width: 1400px;
-  height: 250px;
+  height: 200px;
+}
+.chat_form{
+	opacity: 0.8;
+	background-color : #c0c0c0;
+	float: right;
 }
 .login_page {
 	opacity: 0.8;
@@ -80,20 +86,48 @@ nav ul a {
   
 }
 
-ul {
+/*ul {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}*/
+.top_bar {
+	list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
 }
 
+.greetUser{
+	max-width: 1000px;
+	align: left;
+	display: block;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+}
 li {
     float: right;
 }
-
+/*
 li a {
     display: block;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+}*/
+.top_tab{
+	float: right;
+	display: block;
     color: white;
     font-size: 24px;
     text-align: center;
@@ -127,56 +161,9 @@ li a:hover {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-/*
-.msgs{
-	margin-left: 680px;
-	display:none;
-	width: 300px;
-	height: 500px;
-	padding: 5px 5px 5px 5px;
-	font-size: 12px;
-	overflow: hidden;
-	overflow-y: auto;
-	border: 4px solid rgb(40, 40, 40);
-  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-  margin-right: 0%;
-	margin-left:auto; 
-}
-.blogs{
-	margin-left: 170px;
-	display:none;
-	width: 500px;
-	height: 500px;
-	padding: 5px 5px 5px 5px;
-	font-size: 12px;
-	overflow: hidden;
-	overflow-y: auto;
-	border: 4px solid rgb(40, 40, 40);
-  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-  margin-right: 0%;
-	margin-left:auto; 
-}
-.top_cat{
-	float: left;
-	display:none;
-	max-width: 160px;
-	height: 500px;
-	padding: 5px 5px 5px 5px;
-	font-size: 12px;
-	overflow: hidden;
-	overflow-y: auto;
-	border: 4px solid rgb(40, 40, 40);
-  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-  margin-right: 0%;
-	margin-left:auto; 
-}
-*/
+
 .top_cat {
 	opacity: 0.8;
-	background-color : #c0c0c0;
   border: 4px solid rgb(40, 40, 40);
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
@@ -197,11 +184,11 @@ li a:hover {
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
 	float: center;
-	background-color: #E5D4D0;
-	height: 900px;
+	background-color: #B8DDA5;
+	height: 600px;
 	display:none;
 	
-	width: 900px;
+	width: 1100px;
     /*margin-left: 60px;*/
     /*border-left: 1px solid gray;*/
     padding: 1em;
@@ -210,15 +197,14 @@ li a:hover {
 }
 .msgs {
 	opacity: 0.8;
-	background-color : #c0c0c0;
   border: 4px solid rgb(40, 40, 40);
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
 	display:none;
-	background-color: #D0BAB5;
+	background-color: #B8DDA5;
 	height: 600px;
     float: right;
-    width: 500px;
+    width: 300px;
     /*width: 35%;*/
     /*width: 50%;*/
     /*border-left: 1px solid gray;*/

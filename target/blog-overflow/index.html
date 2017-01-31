@@ -15,10 +15,13 @@ href='blog.css'/>
 </header>
 	
 	<hr />
-	<ul>
-  <li><a href="#Login" id="login">Login</a></li>
-  <li><a href="#Register" id="register">Register</a></li>
-</ul>
+	<ul class="top_bar">
+	  	<li id="LogoutTab" ><a href="#Logout" id="logout" class="top_tab">Logout</a></li>
+		<li id="greet_user" class="greetUser">Welcome <div id="logged_user"></div></li>
+  		<li id="LoginTab"><a href="#Login" id="login"  class="top_tab">Login</a></li>
+  		<li id="RegisterTab"><a href="#Register" id="register"  class="top_tab">Register</a></li>
+  		<li id="HomeTab"><a href="#Home" id="home" class="top_tab">Home</a></li>
+	</ul>
 
 
 
@@ -32,6 +35,14 @@ href='blog.css'/>
    	<tr>
    	<td>Email:</td>
   	<td  align="right"><input type="text" id='email' name="email" placeholder="Enter Username"><br/></td>
+  	</tr>
+  	<tr>
+   	<td>First Name:</td>
+  	<td  align="right"><input type="text" id='firstName' name="firstName" placeholder="Enter First Name"><br/></td>
+  	</tr>
+	<tr>
+  	<td>Last Name:</td>
+  	<td  align="right"><input type="text" id='lastName' name="lastName" placeholder="Enter Last Name"><br/></td>
   	</tr>
 	<tr>
   	<td>Password:</td>
@@ -100,9 +111,9 @@ href='blog.css'/>
 	    <form id="Blog-form" method="post">
     <table>
     <tr>
-    	<th>Create Blog :</th></tr>
+    	<th>Create Blog</th></tr>
   		<tr>
-  		<td  align="center"><input type="text" id='blog' name="blog" placeholder="Give it a name!"><br/></td>
+  		<td  align="center"><input type="text" size="80" id='blog' name="blog" placeholder="Give it a name!"><br/></td>
   		</tr>
   		
   		<tr align="center">
@@ -124,6 +135,12 @@ href='blog.css'/>
 	 </td>
 	 </tr>
 	 </table>
+	 <div id="chatForm" class="chat_form">
+	    <form id="Chat-form" method="post">
+	    <input type="text" size="40" id='chat' name="chat" placeholder="Type a message!"/>
+	    <input class="button" type="submit" id="chat_box" value="Send">
+	    </form>
+	  </div>
 
 	
 </body>

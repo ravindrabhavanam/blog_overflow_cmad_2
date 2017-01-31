@@ -20,6 +20,8 @@ public class UserData {
 	protected Long userId;
 	@Column(nullable = false, unique=true)
 	protected String emailId;
+	protected String firstName;
+	protected String lastName;
 	protected String password;
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	protected List<BlogPost> blogPosts;
@@ -28,16 +30,33 @@ public class UserData {
 	public UserData(){
 		
 	}
-	public UserData(Long userId, String emailId, String password, List<BlogPost> blogPosts,
-			List<Broadcast> broadcastMessages, List<Comment> comments, String interestCategory) {
+
+	
+	public UserData(Long userId, String emailId, String firstName, String lastName, String password,
+			List<BlogPost> blogPosts, String interestCategory) {
 		super();
 		this.userId = userId;
 		this.emailId = emailId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.password = password;
 		this.blogPosts = blogPosts;
 		this.interestCategory = interestCategory;
 	}
-	
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	public Long getUserId() {
 		return userId;
 	}
