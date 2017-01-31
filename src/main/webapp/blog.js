@@ -1,6 +1,7 @@
 $(document).ready(function() {
 			
-	
+	var logged_user = ''
+	var category = ''
 	
 	$("#login").click(function(event) {
 	      event.preventDefault();
@@ -54,6 +55,41 @@ $(document).ready(function() {
 				}
 			});
 	   });
+	  $("#blog_post").click(function(event){
+		  	event.preventDefault();
+			var blogHeading = $("#blog").val();
+			var blogString = $("#content").val();
+			var timestamp = new Date($.now());
+			var data = {
+				"blogHeading" : blogHeading,
+				"blogString" : blogString,
+				"timestamp" :timestamp,
+				"section" : category,
+				"userName" : logged_user
+			};
+			$.ajax({
+				url : 'http://localhost:8080/blog-overflow/online/blogpost/create/' + logged_user,
+				type : 'post',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				success : function(response) {
+					if(response){
+						$("#resMsg").html("Your Blog is Posted!") ;
+						 $("#registerForm").hide();
+						 $("#loginForm").hide();
+						 document.getElementById('Blog-form').reset();
+						 showBlogs(email, response.interestCategory);
+					}
+					else{
+						$("#resMsg").html("Oops! Please Repost!") ;
+					}
+				}
+			});
+	   });
+	  	$("#blog_clear").click(function(event){
+		  	event.preventDefault();
+		  	document.getElementById('Blog-form').reset();
+	  	});
 	
 	  $("#Login").click(function(event){
 		  event.preventDefault();
@@ -70,9 +106,38 @@ $(document).ready(function() {
 			  data : JSON.stringify(data),
 			  success : function(response) {
 				  if(response){
+					  	logged_user = email;
+					  	category = response.interestCategory;
 					  	$("#resMsg").html("successfully Logged in ") ;
 					  	$("#loginForm").hide();
 					  	document.getElementById('login-form').reset();
+					  	$("#blogForm").show();
+					  	/*$.ajax({
+							url : 'http://localhost:8080/blog-overflow/online/blogpost/category/' + response.interestCategory ,
+							type : 'get',
+							contentType : 'application/json',
+							
+							success : function(response) {
+								  if(response){
+									  
+									  var trHTML = '';
+									  var topCat = '';
+									  $.each(response, function (i, message) {
+								            
+								            trHTML += '<tr><td>' + response[i].blogHeading + '</td></tr><tr><td>' + response[i].blogString + '</td></tr>';
+								            topCat += '<tr><td>' + response[i].blogHeading;
+								        });
+									  	$("#Login").hide();
+									  	$("#Register").hide();
+								        $("#display_blogs").html(trHTML);
+										$("#display_blogs").show();
+										$("#display_top_blogs").html(topCat);
+										$("#display_top_blogs").show();
+								  }
+								  else{
+									  }
+								  }
+						})
 					  	$.ajax({
 							url : 'http://localhost:8080/blog-overflow/online/blogpost/messages',
 							type : 'get',
@@ -92,8 +157,10 @@ $(document).ready(function() {
 								  else{
 									  }
 								  }
-						})
-					  	showContent(email);
+						})*/
+						
+					  	showBlogs(email, response.interestCategory);
+					  	showMessages();
 				  }
 				  else{
 					  $("#resMsg").html("Login Failed! Please Try Again!") ;
@@ -101,15 +168,82 @@ $(document).ready(function() {
 			  }
 		  });
 	});
-	function showContent(email){
+	  $("#blog_post").click(function(event){
+		  	event.preventDefault();
+			var blogHeading = $("#blog").val();
+			var blogString = $("#content").val();
+			var timestamp = new Date($.now());
+			var data = {
+				"blogHeading" : blogHeading,
+				"blogString" : blogString,
+				"timestamp" :timestamp,
+				"section" : category,
+				"userName" : logged_user
+			};
+			$.ajax({
+				url : 'http://localhost:8080/blog-overflow/online/blogpost/create/' + logged_user,
+				type : 'post',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				success : function(response) {
+					if(response){
+						$("#resMsg").html("Your Blog is Posted!") ;
+						 $("#registerForm").hide();
+						 $("#loginForm").hide();
+						 document.getElementById('Blog-form').reset();
+						 showBlogs(email, response.interestCategory);
+					}
+					else{
+						$("#resMsg").html("Oops! Please Repost!") ;
+					}
+				}
+			});
+	   });
+	  
+	function showBlogs(email, section){
+		$.ajax({
+			url : 'http://localhost:8080/blog-overflow/online/blogpost/category/' + section ,
+			type : 'get',
+			contentType : 'application/json',
+			
+			success : function(response) {
+				  if(response){
+					  
+					  var trHTML = '';
+					  var topCat = '';
+					  $.each(response, function (i, message) {
+				            
+				            trHTML += '<tr><td>' + response[i].blogHeading + '</td></tr><tr><td>' + response[i].blogString + '</td></tr>';
+				            topCat += '<tr><td>' + response[i].blogHeading;
+				        });
+					  	$("#Login").hide();
+					  	$("#Register").hide();
+				        $("#display_blogs").html(trHTML);
+						$("#display_blogs").show();
+						$("#display_top_blogs").html(topCat);
+						$("#display_top_blogs").show();
+				  }
+				  else{
+					  }
+				  }
+		})
+	}
+	function showMessages(){
 		$.ajax({
 			url : 'http://localhost:8080/blog-overflow/online/blogpost/messages',
 			type : 'get',
 			contentType : 'application/json',
-			data : JSON.stringify(data),
 			success : function(response) {
 				  if(response){
-					  $("#messages").html(response.message);
+					  var trHTML = '';
+					  $.each(response, function (i, message) {
+				            
+				            trHTML += '<tr><td>' + response[i].userName + '</td></tr><tr><td>' + response[i].message + '</td></tr>';
+				        });
+					  	$("#Login").hide();
+					  	$("#Register").hide();
+				        $("#display_messages").html(trHTML);
+						$("#display_messages").show();
 				  }
 				  else{
 					  }

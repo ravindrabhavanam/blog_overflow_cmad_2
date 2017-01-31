@@ -8,7 +8,7 @@
 <link rel='stylesheet' 
 href='blog.css'/>
 </head>
-<body>
+<body background="blog_cloud.bmp" >
   
 	<header>
    <h1>Blog Overflow</h1>
@@ -22,11 +22,8 @@ href='blog.css'/>
 
 
 
-	<div id='openForm'>
 	<div id="resMsg"></div>
-		<nav>
-	
-  
+
  <nav id = nav1>
   <div id="registerForm" class="register_page">
     <div class="content">
@@ -68,11 +65,9 @@ href='blog.css'/>
    
       
 </nav>
-</nav>
-	</div>
+
 	
 	 <nav id = nav2>
-	 <br><br><br>
 	<div id="loginForm" class="login_page">
 	<div class="content">
     <form id="login-form" method="post">
@@ -99,10 +94,42 @@ href='blog.css'/>
 	</div>
 	</div>
 	</nav>
-
+	
+	
+	<div id="blogForm" class="blog_form">
+	    <form id="Blog-form" method="post">
+    <table>
+    <tr>
+    	<th>Create Blog :</th></tr>
+  		<tr>
+  		<td  align="center"><input type="text" id='blog' name="blog" placeholder="Give it a name!"><br/></td>
+  		</tr>
+  		
+  		<tr align="center">
+  		<td><textarea id='content' name="content" placeholder="Tell us what you know!"></textarea><br/></td>
+  		</tr>
+  		<tr align="right">
+    	<td><input class="button" type="submit" id="blog_post" value="Post"></td>
+		<td><input class="button" type="submit" id="blog_clear" value="Cancel"></td>
+    	</tr>
+    	</table>
+     </form>
+     </div>
 	 <br>
-	 <div class="msgs" id="display_messages">
-	 </div>
+	 <table class="transparant">
+	 <tr>
+	 <td class ="top_cat" id="display_top_blogs"></td>
+	 <td class="blogs" id="display_blogs"></td>
+	 <td class="msgs" id="display_messages">
+	 </td>
+	 </tr>
+	 </table>
+	 <div id="chatForm" class="chat_form">
+	    <form id="Chat-form" method="post">
+	    <input type="text" id='chat' name="chat" placeholder="Type a message!"/>
+	    <input class="button" type="submit" id="chat_box" value="Send">
+	    </form>
+	  </div>
 
 	
 </body>

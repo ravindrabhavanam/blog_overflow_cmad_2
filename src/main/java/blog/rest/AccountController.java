@@ -30,6 +30,7 @@ public class AccountController {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response login(UserData user){
 		Account account = new BasicAccount();

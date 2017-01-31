@@ -1,6 +1,10 @@
 
-#registerForm{
+#registerForm,#blogForm{
     display:none;
+}
+div.background {
+	background: url(blog_cloud.bmp) repeat;
+	border: 2px solid black;
 }
 header, footer {
     padding: 1em;
@@ -9,7 +13,24 @@ header, footer {
     clear: left;
     text-align: center;
 }
+textarea{ 
+	width: 1200px;
+ 	height: 120px;
+ }
+.blog_form {
+	opacity: 0.8;
+	background-color : #c0c0c0;
+	float: center;
+  padding: 1px 1px 1x 1px;
+  border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  width: 1400px;
+  height: 250px;
+}
 .login_page {
+	opacity: 0.8;
+	background-color : #c0c0c0;
 	float: right;
   padding: 10px 15px 25px 15px;
   border: 4px solid rgb(40, 40, 40);
@@ -20,6 +41,8 @@ header, footer {
 	margin-left:auto; 
 }
 .register_page {
+	opacity: 0.8;
+	background-color : #c0c0c0;
 	float: right;
   padding: 10px 15px 25px 15px;
   border: 4px solid rgb(40, 40, 40);
@@ -31,7 +54,7 @@ header, footer {
 }
 nav {
 	font-size: 20px;
-	color: #2980b9;
+	color: #400080;
     float: right;
     max-width: 160px;
     margin: 0;
@@ -104,19 +127,102 @@ li a:hover {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
+/*
 .msgs{
-	float: right;
+	margin-left: 680px;
 	display:none;
-	width: 340px;
+	width: 300px;
 	height: 500px;
 	padding: 5px 5px 5px 5px;
-	font-size: 10px;
+	font-size: 12px;
 	overflow: hidden;
 	overflow-y: auto;
 	border: 4px solid rgb(40, 40, 40);
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-  margin-right: auto;
+  margin-right: 0%;
 	margin-left:auto; 
+}
+.blogs{
+	margin-left: 170px;
+	display:none;
+	width: 500px;
+	height: 500px;
+	padding: 5px 5px 5px 5px;
+	font-size: 12px;
+	overflow: hidden;
+	overflow-y: auto;
+	border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  margin-right: 0%;
+	margin-left:auto; 
+}
+.top_cat{
+	float: left;
+	display:none;
+	max-width: 160px;
+	height: 500px;
+	padding: 5px 5px 5px 5px;
+	font-size: 12px;
+	overflow: hidden;
+	overflow-y: auto;
+	border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  margin-right: 0%;
+	margin-left:auto; 
+}
+*/
+.top_cat {
+	opacity: 0.8;
+	background-color : #c0c0c0;
+  border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+	display:none;
+	background-color: #B8DDA5;
+	height: 600px;
+    float: left;
+    width: 200px;
+    padding: 1em;
+    /*width: 20%;*/
+	overflow: hidden;
+	overflow-y: auto;
+}
+.blogs {
+	opacity: 0.8;
+	background-color : #c0c0c0;
+  border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+	float: center;
+	background-color: #E5D4D0;
+	height: 900px;
+	display:none;
+	
+	width: 900px;
+    /*margin-left: 60px;*/
+    /*border-left: 1px solid gray;*/
+    padding: 1em;
+    overflow: scroll;
+    overflow-y: auto;
+}
+.msgs {
+	opacity: 0.8;
+	background-color : #c0c0c0;
+  border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+	display:none;
+	background-color: #D0BAB5;
+	height: 600px;
+    float: right;
+    width: 500px;
+    /*width: 35%;*/
+    /*width: 50%;*/
+    /*border-left: 1px solid gray;*/
+    padding: 1em;
+    overflow: auto;
+    overflow-y: auto;
 }
