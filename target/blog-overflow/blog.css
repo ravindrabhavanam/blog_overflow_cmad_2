@@ -1,5 +1,5 @@
 
-#registerForm,#blogForm,#chatForm,#greet_user,#LogoutTab,#HomeTab{
+#registerForm,#blogForm,#chatForm,#commentForm,#greet_user,#LogoutTab,#HomeTab{
     display:none;
 }
 div.background {
@@ -30,6 +30,12 @@ textarea{
   height: 200px;
 }
 .chat_form{
+	opacity: 0.8;
+	background-color : #c0c0c0;
+	float: right;
+}
+
+.comment_form{
 	opacity: 0.8;
 	background-color : #c0c0c0;
 	float: right;
@@ -183,7 +189,7 @@ li a:hover {
   border: 4px solid rgb(40, 40, 40);
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-	float: center;
+	/*float: center;*/
 	background-color: #B8DDA5;
 	height: 600px;
 	display:none;
@@ -203,6 +209,23 @@ li a:hover {
 	display:none;
 	background-color: #B8DDA5;
 	height: 600px;
+    float: right;
+    width: 300px;
+    /*width: 35%;*/
+    /*width: 50%;*/
+    /*border-left: 1px solid gray;*/
+    padding: 1em;
+    overflow: auto;
+    overflow-y: auto;
+}
+.msg {
+	opacity: 0.8;
+  border: 4px solid rgb(40, 40, 40);
+  box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+	display:none;
+	background-color: #B8DDA5;
+	/*height: 600px;*/
     float: right;
     width: 300px;
     /*width: 35%;*/

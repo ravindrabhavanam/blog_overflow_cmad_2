@@ -132,9 +132,16 @@ href='blog.css'/>
 	 <td class ="top_cat" id="display_top_blogs"></td>
 	 <td class="blogs" id="display_blogs"></td>
 	 <td class="msgs" id="display_messages">
+	 <td class="msg" id="view_message">
 	 </td>
 	 </tr>
 	 </table>
+	 <div id="commentForm" class="comment_form">
+	    <form id="Comment-form" method="post">
+	    <input type="text" size="100" id='comment' name="comment" placeholder="Type a comment"/>
+	    <input class="button" type="submit" id="comment_box" value="Comment">
+	    </form>
+	  </div>
 	 <div id="chatForm" class="chat_form">
 	    <form id="Chat-form" method="post">
 	    <input type="text" size="40" id='chat' name="chat" placeholder="Type a message!"/>

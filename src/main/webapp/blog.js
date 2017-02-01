@@ -38,8 +38,11 @@ $(document).ready(function() {
 		  $("#greet_user").hide();
 		  $("#blogForm").hide();
 		  $("#chatForm").hide();
+		  $("#commentForm").hide();
 		  $("#display_blogs").html("");
 		  $("#display_blogs").hide();
+		  $("#view_blog").html("");
+		  $("#view_blog").hide();
 		  $("#display_top_blogs").html("");
 		  $("#display_top_blogs").hide();
 		  $("#display_messages").html("");
@@ -55,13 +58,18 @@ $(document).ready(function() {
 		  $("#resMsg").html("");
 		  $("#blogForm").show();
 		  $("#chatForm").show();
+		  $("#commentForm").hide();
+		  $("#view_blog").hide();
 		  showBlogs(logged_user, category);
 		  showMessages();
 		  
 	  });
-	  $("#view_blog").click(function(event){
+	  /*jQuery('#viewBlog')[0].on('click',function(){*/
+	  /*$("#viewBlog").click(function(event){*/
+	  function viewBlog(blog_id){
+		  alert("yes")
 		  event.preventDefault();
-		  blog_id = $(this).attr('href');
+		  /*blog_id = $(this).attr('href');*/
 		  /*blog_id = 2*/
 		  $("#resMsg").html(blog_id);
 		  $.ajax({
@@ -75,15 +83,16 @@ $(document).ready(function() {
 						$.each(response["comments"], function (i, comment) {  
 							trHTML += '<tr><td>' + comment.userName + '</td></tr><tr><td><span style="font-weight:bold">' + comment.comment + '</span></td></tr>';
 						});
-						$("#display_blogs").html(trHTML);
-						$("#display_blogs").show();
+						$("#view_blog").html(trHTML);
+						$("#view_blog").show();
+						$("#commentForm").show();
 					}
 					else{
 						$("#resMsg").html("Oops! Unable to retrieve blog, try again!") ;
 					}
 				}
 			});
-	  });
+	  }
 	  
 	  $("#Register").click(function(event){
 		  	event.preventDefault();
@@ -146,6 +155,8 @@ $(document).ready(function() {
 					  	$("#chatForm").show();
 					  	$("#LoginTab").hide();
 					  	$("#RegisterTab").hide();
+					  	$("#view_blog").hide();
+						$("#commentForm").hide();
 					  	showBlogs(email, response.interestCategory);
 					  	showMessages();
 				  }
@@ -234,13 +245,19 @@ $(document).ready(function() {
 					  var topCat = '<ul>';
 					  $.each(response, function (i, message) {
 						  	var humanTime = unixTimeToHumanTime(response[i].timestamp)
-				            trHTML += '<tr><td><span style="font-weight:bold">' + response[i].blogHeading + '</span></td><td align="right">' + humanTime + '</td></tr><tr><td>' + response[i].blogString + '</td></tr><br/>';
-				            topCat += '<li><a href="#' + response[i].id + '"  id="view_blog">' + response[i].blogHeading + '</a></li><br/>';
-				            /*
+				            trHTML += '<tr><td><span style="font-weight:bold">' + response[i].blogHeading + '</span><span style="font-weight:italic"> -by ' + response[i].userName + '</span></td><td align="right">' + humanTime + '</td></tr><tr><td>' + response[i].blogString + '</td></tr><br/>';
+						  	/*topCat += '<li><a href="#" onclick="return viewBlog(' + response[i].id + ')  id="view_blog">' + response[i].blogHeading + '</a></li><br/>';
+						  	
+						  	topCat += '<li><a ' + response[i].id + 'id="view_blog" onclick="document.getElementById("viewBlog").click()">' + response[i].blogHeading + '</a></li><br/>';
+				           
 						  	topCat += '<li><a href="#viewBlog" id="view_blog">' + response[i].blogHeading + '</a></li><br/>';
 					        */
+						  	topCat += '<li> <a href="javascript:viewBlog(' + response[i].id + ');" id="view_blog">' + response[i].blogHeading + '</a></li><br/>';
+					           
 					  });
-					  topCat += '</ul>';
+					  /*topCat += '<li id="LoginTab"><a href="#Login" id="login"  class="top_tab">Login</a></li>'
+					  */topCat += '</ul>';
+					  
 					  	
 				        $("#display_blogs").html(trHTML);
 						$("#display_blogs").show();
