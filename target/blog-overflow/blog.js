@@ -245,7 +245,7 @@ $(document).ready(function() {
 					  var topCat = '<ul>';
 					  $.each(response, function (i, message) {
 						  	var humanTime = unixTimeToHumanTime(response[i].timestamp)
-				            trHTML += '<tr><td><span style="font-weight:bold">' + response[i].blogHeading + '</span></td><td align="right">' + humanTime + '</td></tr><tr><td>' + response[i].blogString + '</td></tr><br/>';
+				            trHTML += '<tr><td><span style="font-weight:bold">' + response[i].blogHeading + '</span></td><td><span style="font-weight:italic"> <tab1>-by ' + response[i].userName + '</tab1></span></td><td align="right">' + humanTime + '</td></tr><tr><td>' + response[i].blogString + '</td></tr><br/>';
 						  	/*topCat += '<li><a href="#" onclick="return viewBlog(' + response[i].id + ')  id="view_blog">' + response[i].blogHeading + '</a></li><br/>';
 						  	
 						  	topCat += '<li><a ' + response[i].id + 'id="view_blog" onclick="document.getElementById("viewBlog").click()">' + response[i].blogHeading + '</a></li><br/>';
