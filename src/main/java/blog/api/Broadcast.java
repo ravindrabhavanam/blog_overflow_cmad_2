@@ -2,10 +2,9 @@ package blog.api;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,8 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Broadcast {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	protected Long id;
+	protected String id = new ObjectId().toString();
 	protected String userName;
 	private @Temporal(TemporalType.TIMESTAMP) Date timestamp;
 	private String message;
@@ -25,17 +23,17 @@ public class Broadcast {
 		
 	}
 	
-	public Broadcast(Long id, String userName, Date timestamp, String message) {
+	public Broadcast(String id, String userName, Date timestamp, String message) {
 		super();
 		this.id = id;
 		this.userName = userName;
 		this.timestamp = timestamp;
 		this.message = message;
 	}
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getUserName() {

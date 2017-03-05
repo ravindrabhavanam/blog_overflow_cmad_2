@@ -6,8 +6,6 @@
 	<persistence-unit name="blog" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>blog.api.UserData</class>
-		<class>blog.api.BlogPost</class>
-		<class>blog.api.Broadcast</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:blog;create=true" />

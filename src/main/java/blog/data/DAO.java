@@ -18,13 +18,13 @@ public interface DAO {
 
 	BlogPost createBlogPost(BlogPost blog);
 
-	BlogPost readBlogPost(Long blogId);
+	BlogPost readBlogPost(String blogId);
 
 	void updateBlogPost(BlogPost blog);
 
 	Comment createComment(Comment comment);
 
-	Long createBroadcast(Broadcast message);
+	String createBroadcast(Broadcast message);
 
 	List<Broadcast> getBroadcast();
 

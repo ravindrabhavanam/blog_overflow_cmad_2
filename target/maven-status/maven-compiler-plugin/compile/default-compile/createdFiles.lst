@@ -12,7 +12,9 @@ blog\api\InvalidPasswordException.class
 blog\api\BlogException.class
 blog\api\BlogNotFoundException.class
 blog\data\DAO.class
+blog\data\MongoDao.class
 blog\rest\AccountController.class
+blog\api\CategoryNotFoundException.class
 blog\api\Account.class
 blog\api\BlogPost.class
 blog\api\UserException.class

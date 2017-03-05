@@ -2,14 +2,11 @@ package blog.api;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -23,8 +20,6 @@ public class UserData {
 	protected String firstName;
 	protected String lastName;
 	protected String password;
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	protected List<BlogPost> blogPosts;
 	protected String interestCategory;
 	
 	public UserData(){
@@ -40,7 +35,6 @@ public class UserData {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
-		this.blogPosts = blogPosts;
 		this.interestCategory = interestCategory;
 	}
 
@@ -74,12 +68,6 @@ public class UserData {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public List<BlogPost> getBlogPosts() {
-		return blogPosts;
-	}
-	public void setBlogPosts(List<BlogPost> blogPosts) {
-		this.blogPosts = blogPosts;
 	}
 	public String getInterestCategory() {
 		return interestCategory;

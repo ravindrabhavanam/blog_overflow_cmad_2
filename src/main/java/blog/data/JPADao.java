@@ -61,7 +61,6 @@ public class JPADao implements DAO {
 		//UserData user = em.find(UserData.class, email);
 		try{
 			UserData user = em.createQuery("SELECT user FROM UserData user "
-					+ "LEFT JOIN user.blogPosts "
 					+ "WHERE user.emailId = :value1", UserData.class)
 				.setParameter("value1", email).getSingleResult();
 			em.close();
@@ -95,7 +94,7 @@ public class JPADao implements DAO {
 	}
 	
 	@Override
-	public BlogPost readBlogPost(Long blogId) {
+	public BlogPost readBlogPost(String blogId) {
 		EntityManager em = factory.createEntityManager();
 		BlogPost blog = em.find(BlogPost.class, blogId);
 		em.close();
@@ -106,7 +105,6 @@ public class JPADao implements DAO {
 	public List<BlogPost> getBlogPosts(String category) {
 		EntityManager em = factory.createEntityManager();
 		List<BlogPost> blogs = em.createQuery("SELECT blog FROM BlogPost blog "
-				+ "LEFT JOIN blog.comments "
 				+ "WHERE blog.section = :value1", BlogPost.class)
 			.setParameter("value1", category).getResultList();
 		em.close();
@@ -133,7 +131,7 @@ public class JPADao implements DAO {
 	}
 	
 	@Override
-	public Long createBroadcast(Broadcast message) {
+	public String createBroadcast(Broadcast message) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(message);

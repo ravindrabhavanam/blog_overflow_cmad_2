@@ -3,13 +3,9 @@ package blog.api;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,22 +14,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class BlogPost {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	protected Long id;
+	protected String id = new ObjectId().toString();
 	protected @Temporal(TemporalType.TIMESTAMP) Date timestamp;
 	protected String blogHeading;
 	protected String blogString;
 	protected String section;
 	protected String userName;
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	protected List<Comment> comments;
 	
 	public BlogPost(){
 		
 	}
 	
 
-	public BlogPost(Long id, Date timestamp, String blogHeading, String blogString, String section, String userName,
+	public BlogPost(String id, Date timestamp, String blogHeading, String blogString, String section, String userName,
 			List<Comment> comments) {
 		super();
 		this.id = id;
@@ -42,7 +35,6 @@ public class BlogPost {
 		this.blogString = blogString;
 		this.section = section;
 		this.userName = userName;
-		this.comments = comments;
 	}
 
 
@@ -54,10 +46,10 @@ public class BlogPost {
 		this.section = section;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Date getTimestamp() {
@@ -88,12 +80,6 @@ public class BlogPost {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public List<Comment> getComments() {
-		return comments;
-	}
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
 	}
 	
 }

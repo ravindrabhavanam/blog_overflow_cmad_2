@@ -28,13 +28,13 @@ public class BlogController {
 	@Path("/create/{email}")
 	public Response create(@PathParam("email") String email, BlogPost blog) {
 		Account account = new BasicAccount();
-		Long blogId = account.createBlog(email, blog);
+		String blogId = account.createBlog(email, blog);
 		return Response.ok().entity(blogId + "").build();
 	}
 	
 	@GET
 	@Path("/delete/{blogId}")
-	public Response delete(@PathParam("blogId") Long blogId){
+	public Response delete(@PathParam("blogId") String blogId){
 		//Account account = new BasicAccount();
 		//UserData user = account.getUser(email);
 		return Response.ok().entity("SUCCESS").build();
@@ -43,7 +43,7 @@ public class BlogController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/view/{blogId}")
-	public Response view(@PathParam("blogId") Long blogId){
+	public Response view(@PathParam("blogId") String blogId){
 		Account account = new BasicAccount();
 		BlogPost blog = account.readBlog(blogId);
 		return Response.ok().entity(blog).build();
@@ -71,10 +71,19 @@ public class BlogController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/comment/{blogId}")
-	public Response comment(@PathParam("blogId") Long blogId, Comment comment) {
+	public Response comment(@PathParam("blogId") String blogId, Comment comment) {
 		Account account = new BasicAccount();
-		Long commentId = account.createComment(blogId, comment);
+		String commentId = account.createComment(blogId, comment);
 		return Response.ok().entity(commentId + "").build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/comments/{blogId}")
+	public Response comments(@PathParam("blogId") String blogId) {
+		Account account = new BasicAccount();
+		List<Comment> comments= account.getComments(blogId);
+		return Response.ok().entity(comments).build();
 	}
 	
 	@POST
@@ -82,7 +91,7 @@ public class BlogController {
 	@Path("/broadcast")
 	public Response broadcast(Broadcast message) {
 		Account account = new BasicAccount();
-		Long messageId = account.createBroadcast(message);
+		String messageId = account.createBroadcast(message);
 		return Response.ok().entity(messageId + "").build();
 	}
 	
