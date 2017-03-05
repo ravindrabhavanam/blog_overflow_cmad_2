@@ -6,17 +6,32 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Indexes;
+import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Index;
+
+import org.mongodb.morphia.annotations.Field;
+
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import static org.mongodb.morphia.utils.IndexType.TEXT;
 
 @Entity
 @XmlRootElement
+@Indexes({
+	@Index(fields = @Field(value = "blogHeading", type = TEXT)),
+	@Index(fields = @Field(value = "blogString", type = TEXT)),
+	@Index(fields = @Field(value = "userName", type = TEXT))
+})
 public class BlogPost {
 	@Id
 	protected String id = new ObjectId().toString();
 	protected @Temporal(TemporalType.TIMESTAMP) Date timestamp;
+	@Property
 	protected String blogHeading;
+	@Property
 	protected String blogString;
 	protected String section;
 	protected String userName;

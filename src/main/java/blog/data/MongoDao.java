@@ -32,6 +32,11 @@ public class MongoDao {
 		List<BlogPost> blogs = dao.createQuery().field("section").equal(category).asList();
 		return blogs;
 	}
+	public List<BlogPost> searchBlogPosts(String searchString) {
+		BasicDAO<BlogPost, Integer> dao = new BasicDAO<>(BlogPost.class, store);
+		List<BlogPost> blogs = dao.createQuery().search(searchString).asList();
+		return blogs;
+	}
 	public String createBroadcast(Broadcast message) {
 		BasicDAO<Broadcast, Integer> dao = new BasicDAO<>(Broadcast.class, store);
 		dao.save(message);
