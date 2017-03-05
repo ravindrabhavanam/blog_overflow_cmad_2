@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="blogApp">
 <head>
 <meta charset="UTF-8">
 <title>BLOG OVERFLOW </title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src='blog.js'></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->
+
+<script src="angular.js"></script>
+<script src="angularBlog.js"></script>
 <link rel='stylesheet' 
 href='blog.css'/>
 </head>
@@ -127,10 +131,29 @@ href='blog.css'/>
      </form>
      </div>
 	 <br>
-	 <table class="transparant">
+	 
+	 <div class="blogs" ng-controller="BlogListController">
+	 <table class="transparant" ng-repeat='blog in blogList'>
 	 <tr>
-	 <td class ="top_cat" id="display_top_blogs"></td>
-	 <td class="blogs" id="display_blogs"></td>
+	 <td class ="top_cat" id="display_top_blogs">
+	 <ul>
+	 <li> <a href="javascript:viewBlog(' + response[i].id + ');" id="view_blog">{{blog.blogHeading}}</a></li><br/>
+	 </ul>
+	 </td>
+	 </table>
+	 <table class="transparant" ng-repeat='blog in blogList'>
+	 <td class="blogs" id="display_blogs">
+	 <tr>
+	 <td><span style="font-weight:bold">{{blog.blogHeading}}</span></td>
+	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
+	 <td align="right">{{humanTime}}</td>
+	 </tr><tr>
+	 <td>{{blog.blogString}}</td>
+	 </tr><br/>						  	
+	 </td>
+	 </table>
+	 </div>
+	 <table class="transparant">
 	 <td class="msgs" id="display_messages">
 	 <td class="msg" id="view_message">
 	 </td>
@@ -148,7 +171,6 @@ href='blog.css'/>
 	    <input class="button" type="submit" id="chat_box" value="Send">
 	    </form>
 	  </div>
-
 	
 </body>
 </html>
