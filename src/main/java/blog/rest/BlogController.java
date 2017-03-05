@@ -58,6 +58,15 @@ public class BlogController {
 		return Response.ok().entity(blogs).build();
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/search/{searchString}")
+	public Response search(@PathParam("searchString") String searchString){
+		Account account = new BasicAccount();
+		List<BlogPost> blogs = account.searchBlogPosts(searchString);
+		return Response.ok().entity(blogs).build();
+	}
+	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)

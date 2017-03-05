@@ -173,4 +173,10 @@ public class BasicAccount implements Account {
 		List<Comment> comments= mongoDao.getComments(blogId);
 		return comments;
 	}
+	@Override
+	public List<BlogPost> searchBlogPosts(String searchString) throws InvalidDataException, BlogNotFoundException, UserException {
+		// TODO Add various checks for throwing exceptions
+		List<BlogPost> blogs= mongoDao.searchBlogPosts(searchString);
+		return blogs;
+	}
 }

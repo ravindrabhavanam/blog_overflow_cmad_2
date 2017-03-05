@@ -16,4 +16,5 @@ public interface Account {
 	List<Broadcast> getBroadcast() throws InvalidDataException, UserException;
 	List<BlogPost> readBlogs(String category) throws CategoryNotFoundException, BlogException, UserException;
 	List<Comment> getComments(String blogId) throws InvalidDataException, BlogNotFoundException, UserException;
+	List<BlogPost> searchBlogPosts(String searchString) throws InvalidDataException, BlogNotFoundException, UserException;
 }
