@@ -1,3 +1,5 @@
+//var jwt = require('jwt-simple');
+var JWT_SECRET = 'cmad';
 var blogApp = angular.module('blogApp', []);
 blogApp.controller('BlogListController' );
 
@@ -7,21 +9,77 @@ blogApp.controller('BlogListController', [ '$scope', 'CreateBlog', 'ListBlog',fu
 	ListBlog.getBlogs().then(function(data) {
 		$scope.blogList = data;
 	});
+	ListBlog.getMessages().then(function(data) {
+		$scope.messageList = data;
+	});
+	ListBlog.getComments().then(function(data) {
+		$scope.commentList = data;
+	});
+	$scope.searchBlogs = function(){
+	ListBlog.searchBlogs().then(function(data) {
+		$scope.searchList = data;
+	});
+	};
+	$scope.viewBlog = function(blogId){
+		ListBlog.getComments(blogId).then(function(data) {
+			$scope.blog = data;
+		});
+	};
 	}
 ]);
 
-myApp.service('ListBlog', ['$http',function($http){
+blogApp.service('ListBlog', ['$http',function($http){
 	
 	this.getBlogs = function(){
 		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/category/cmad')
 							.then(function(response){
-								alert(response.data);
 								return response.data;
 							},function(response){
 								alert('error');
 							});
 		return promise;
 	}
+	
+	this.getMessages = function(){
+		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/messages')
+							.then(function(response){
+								return response.data;
+							},function(response){
+								alert('error');
+							});
+		return promise;
+	}
+	
+	this.searchBlogs = function(){
+		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/search/blog')
+							.then(function(response){
+								return response.data;
+							},function(response){
+								alert('error');
+							});
+		return promise;
+	}
+	
+	this.viewBlog = function(){
+		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/search/blog')
+							.then(function(response){
+								return response.data;
+							},function(response){
+								alert('error');
+							});
+		return promise;
+	}
+	this.getComments = function(blogId){
+		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/comments/' + blogId)
+							.then(function(response){
+								return response.data;
+							},function(response){
+								alert('error');
+							});
+		return promise;
+	}
+	
+	
 
 }]);
 
@@ -79,6 +137,7 @@ $(document).ready(function() {
 		  $("#display_messages").hide();
 		  $("#LogoutTab").hide();
 		  $("#HomeTab").hide();
+		  $("#search_blogs").hide();
 		  logged_user = ''
 		  category = ''
 		  display_name = ''
@@ -90,17 +149,22 @@ $(document).ready(function() {
 		  $("#chatForm").show();
 		  $("#commentForm").hide();
 		  $("#view_blog").hide();
+		  $("#search_blogs").hide();
 		  showBlogs(logged_user, category);
 		  showMessages();
 		  
 	  });
 	  /*jQuery('#viewBlog')[0].on('click',function(){*/
-	  /*$("#viewBlog").click(function(event){*/
+	 /* $("#viewBlog").click(function(event){
+		  viewBlog();
+	  });
+	  */
+	  /*
 	  function viewBlog(blog_id){
 		  alert("yes")
 		  event.preventDefault();
-		  /*blog_id = $(this).attr('href');*/
-		  /*blog_id = 2*/
+		  //blog_id = $(this).attr('href');
+		  //blog_id = 2
 		  $("#resMsg").html(blog_id);
 		  $.ajax({
 				url : 'http://localhost:8080/blog-overflow/online/blogpost/view/' + blog_id,
@@ -116,14 +180,61 @@ $(document).ready(function() {
 						$("#view_blog").html(trHTML);
 						$("#view_blog").show();
 						$("#commentForm").show();
+						$("#search_blogs").hide();
 					}
 					else{
 						$("#resMsg").html("Oops! Unable to retrieve blog, try again!") ;
 					}
 				}
 			});
-	  }
+	  }*/
 	  
+	  $("#search").click(function(event){
+		  event.preventDefault();
+		  $("#commentForm").hide();
+		  $("#view_blog").hide();
+		  $("#display_blogs").hide();
+		  $("#search_blogs").show();
+		  $("#greet_user").show();
+		  	$("#LogoutTab").show();
+		  	$("#HomeTab").show();
+		  	$("#blogForm").show();
+		  	$("#chatForm").show();
+		  	$("#LoginTab").hide();
+		  	$("#RegisterTab").hide();
+	  });
+	  $("#search").click(function(event){
+		  var searchString = $("#searchString").val();
+		  $.ajax({
+				url : 'http://localhost:8080/blog-overflow/online/blogpost/search/' + searchString ,
+				type : 'get',
+				contentType : 'application/json',
+				
+				success : function(response) {
+					  if(response){
+						  
+						  var trHTML = '';
+						
+						  $.each(response, function (i, message) {
+							  	var humanTime = unixTimeToHumanTime(response[i].timestamp)
+					            trHTML += '<tr><td><span style="font-weight:bold">' + response[i].blogHeading + '</span></td><td><span style="font-weight:italic"> <tab1>-by ' + response[i].userName + '</tab1></span></td><td align="right">' + humanTime + '</td></tr><tr><td>' + response[i].blogString + '</td></tr><br/>';
+							  	
+						  });
+						  /*topCat += '<li id="LoginTab"><a href="#Login" id="login"  class="top_tab">Login</a></li>'
+						  */
+						  
+						  	
+					        $("#search_blogs").html(trHTML);
+							$("#search_blogs").show();
+							$("#commentForm").hide();
+							  $("#view_blog").hide();
+							  $("#display_blogs").hide();
+					  }
+					  else{
+						  }
+					  }
+			})
+	  });
 	  $("#Register").click(function(event){
 		  	event.preventDefault();
 			var password = $("#password").val();
@@ -171,6 +282,7 @@ $(document).ready(function() {
 			  data : JSON.stringify(data),
 			  success : function(response) {
 				  if(response){
+					
 					  	logged_user = email;
 					  	category = response.interestCategory;
 					  	$("#resMsg").html("successfully Logged in!") ;
@@ -187,8 +299,19 @@ $(document).ready(function() {
 					  	$("#RegisterTab").hide();
 					  	$("#view_blog").hide();
 						$("#commentForm").hide();
+						$("#search_blogs").hide();
+						$("#search_form").show();
 					  	//showBlogs(email, response.interestCategory);
-					  	showMessages();
+					  	//showMessages();
+						$("#display_blogs").show();
+						$("#display_top_blogs").show();
+						$("#display_messages").show();
+						
+						token = '';
+						//var token = jwt.encode(data, JWT_SECRET);
+					
+						console.log(token);
+						//return response.json({token: token});
 				  }
 				  else{
 					  $("#resMsg").html("Login Failed! Please Try Again!") ;
@@ -253,7 +376,7 @@ $(document).ready(function() {
 						 $("#registerForm").hide();
 						 $("#loginForm").hide();
 						 document.getElementById('Chat-form').reset();
-						 showMessages();
+						 //showMessages();
 					}
 					else{
 						

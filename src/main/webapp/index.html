@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <title>BLOG OVERFLOW </title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src='blog.js'></script>
+
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->
 
 <script src="angular.js"></script>
-<script src="angularBlog.js"></script>
+<script type="text/javascript" src='angularBlog.js'></script>
 <link rel='stylesheet' 
 href='blog.css'/>
 </head>
@@ -25,6 +25,17 @@ href='blog.css'/>
   		<li id="LoginTab"><a href="#Login" id="login"  class="top_tab">Login</a></li>
   		<li id="RegisterTab"><a href="#Register" id="register"  class="top_tab">Register</a></li>
   		<li id="HomeTab"><a href="#Home" id="home" class="top_tab">Home</a></li>
+  		<li id="searchForm">
+  		<div ng-controller="BlogListController">
+  		<!-- <input class="button" type="submit" id="Search" value="Search"></li> -->
+  		 <form ng-submit='searchBlogs()' id='search_form' class="search_form">
+			 <!-- <input ng-model="searchString" > -->
+			 <input type='text' id='searchString' name='searchString placeholder='Search Blogs'>
+			 <input class="button" type="submit" id="search" value="search">
+			 <!--  <a href="#Search" id="search" class="top_tab">Search</a>-->
+		</form>
+		</li>
+		</div>
 	</ul>
 
 
@@ -132,33 +143,56 @@ href='blog.css'/>
      </div>
 	 <br>
 	 
-	 <div class="blogs" ng-controller="BlogListController">
-	 <table class="transparant" ng-repeat='blog in blogList'>
-	 <tr>
+	 <table class="transparant" ng-controller="BlogListController">
+	 
 	 <td class ="top_cat" id="display_top_blogs">
+	 <tr ng-repeat='blog in blogList'>
 	 <ul>
-	 <li> <a href="javascript:viewBlog(' + response[i].id + ');" id="view_blog">{{blog.blogHeading}}</a></li><br/>
+	
+	 <li> 
+	 <a ng-href='#' id="view_blog" ng-click='viewBlog(blog.blogId)' >{{blog.blogHeading}}</a>
+	 <!--  <input class='button' id="view_blog" ng-click='viewBlog(blog.blogId)' name='{{blog.blogHeading}}' value='{{blog.blogHeading}}' >-->
+	 </li><br/>
 	 </ul>
+	 </tr>
 	 </td>
-	 </table>
-	 <table class="transparant" ng-repeat='blog in blogList'>
+	 
+	 
 	 <td class="blogs" id="display_blogs">
-	 <tr>
+	 <tr ng-repeat='blog in blogList'>
 	 <td><span style="font-weight:bold">{{blog.blogHeading}}</span></td>
 	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
-	 <td align="right">{{humanTime}}</td>
-	 </tr><tr>
+	 <td align="right">{{humanTime}}</td><br/>
 	 <td>{{blog.blogString}}</td>
 	 </tr><br/>						  	
 	 </td>
-	 </table>
-	 </div>
-	 <table class="transparant">
-	 <td class="msgs" id="display_messages">
+	 
+	 <td class="blogs" id="search_blogs">
+	 <!-- 
+	 <tr ng-repeat='blog in searchList'>
+	 <td><span style="font-weight:bold">{{blog.blogHeading}}</span></td>
+	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
+	 <td align="right">{{humanTime}}</td><br/>
+	 <td>{{blog.blogString}}</td>
+	 </tr><br/>		 
+	 -->				  	
+	 </td>
+	 
+				        
 	 <td class="msg" id="view_message">
 	 </td>
+	 
+	 <td class="msgs" id="display_messages">
+	 <tr ng-repeat='message in messageList'>
+	 <td><span style="font-weight:bold">{{message.userName }}</span></td>
+	 <script>var humanTime = unixTimeToHumanTime({{message.timestamp}})</script>
+	 <td align="right">{{humanTime}}</td><br/>
+	 <td>{{message.message}}</td>
+	 </tr><br/>
+	
 	 </tr>
 	 </table>
+	 
 	 <div id="commentForm" class="comment_form">
 	    <form id="Comment-form" method="post">
 	    <input type="text" size="100" id='comment' name="comment" placeholder="Type a comment"/>
