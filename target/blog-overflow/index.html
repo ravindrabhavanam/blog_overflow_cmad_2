@@ -146,12 +146,13 @@ href='blog.css'/>
 	 <table class="transparant" ng-controller="BlogListController">
 	 
 	 <td class ="top_cat" id="display_top_blogs">
-	 <tr ng-repeat='blog in blogList'>
+	 <!-- <tr ng-repeat='blog in blogList'> -->
+	 <tr>
 	 <ul>
 	
 	 <li> 
-	 <a ng-href='#' id="view_blog" ng-click='viewBlog(blog.blogId)' >{{blog.blogHeading}}</a>
-	 <!--  <input class='button' id="view_blog" ng-click='viewBlog(blog.blogId)' name='{{blog.blogHeading}}' value='{{blog.blogHeading}}' >-->
+	 <!-- <a ng-href='#' id="view_blog" ng-click='viewBlog(blog.blogId)' >{{blog.blogHeading}}</a> -->
+	 <input class='button' id="view_blog" ng-click='viewBlog(blog.blogId)' name='{{blog.blogHeading}}' value='{{blog.blogHeading}}' >
 	 </li><br/>
 	 </ul>
 	 </tr>
@@ -162,7 +163,9 @@ href='blog.css'/>
 	 <tr ng-repeat='blog in blogList'>
 	 <td><span style="font-weight:bold">{{blog.blogHeading}}</span></td>
 	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
-	 <td align="right">{{humanTime}}</td><br/>
+	 <!-- <script>var humanTime =''</script>
+	 <td align="right">{{humanTime}}</td> -->
+	 <br/>
 	 <td>{{blog.blogString}}</td>
 	 </tr><br/>						  	
 	 </td>
@@ -185,8 +188,9 @@ href='blog.css'/>
 	 <td class="msgs" id="display_messages">
 	 <tr ng-repeat='message in messageList'>
 	 <td><span style="font-weight:bold">{{message.userName }}</span></td>
-	 <script>var humanTime = unixTimeToHumanTime({{message.timestamp}})</script>
-	 <td align="right">{{humanTime}}</td><br/>
+	 <!-- <script>var humanTime =''</script>
+	 <td align="right">{{humanTime}}</td> -->
+	 <br/> 
 	 <td>{{message.message}}</td>
 	 </tr><br/>
 	

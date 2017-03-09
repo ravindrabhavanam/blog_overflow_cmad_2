@@ -4,7 +4,7 @@ var blogApp = angular.module('blogApp', []);
 blogApp.controller('BlogListController' );
 
 
-blogApp.controller('BlogListController', [ '$scope', 'CreateBlog', 'ListBlog',function ($scope, CreateBlog,ListBlog) {
+blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope, ListBlog) {
 	
 	ListBlog.getBlogs().then(function(data) {
 		$scope.blogList = data;
@@ -15,6 +15,7 @@ blogApp.controller('BlogListController', [ '$scope', 'CreateBlog', 'ListBlog',fu
 	ListBlog.getComments().then(function(data) {
 		$scope.commentList = data;
 	});
+	/*
 	$scope.searchBlogs = function(){
 	ListBlog.searchBlogs().then(function(data) {
 		$scope.searchList = data;
@@ -25,6 +26,7 @@ blogApp.controller('BlogListController', [ '$scope', 'CreateBlog', 'ListBlog',fu
 			$scope.blog = data;
 		});
 	};
+	*/
 	}
 ]);
 
@@ -150,8 +152,8 @@ $(document).ready(function() {
 		  $("#commentForm").hide();
 		  $("#view_blog").hide();
 		  $("#search_blogs").hide();
-		  showBlogs(logged_user, category);
-		  showMessages();
+		  //showBlogs(logged_user, category);
+		  //showMessages();
 		  
 	  });
 	  /*jQuery('#viewBlog')[0].on('click',function(){*/
@@ -460,4 +462,15 @@ $(document).ready(function() {
 
 
 });
-
+function unixTimeToHumanTime(UNIX_timestamp){
+	  var a = new Date(UNIX_timestamp);
+	  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+	  var year = a.getFullYear();
+	  var month = months[a.getMonth()];
+	  var date = a.getDate();
+	  var hour = a.getHours();
+	  var min = a.getMinutes();
+	  var sec = a.getSeconds();
+	  var time = month + ' ' + date + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+	  return time;
+	}
