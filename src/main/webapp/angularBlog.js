@@ -15,18 +15,53 @@ blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope,
 	ListBlog.getComments().then(function(data) {
 		$scope.commentList = data;
 	});
-	/*
+	$scope.searchList = [];
+	$scope.blogComments = [];
+	
 	$scope.searchBlogs = function(){
-	ListBlog.searchBlogs().then(function(data) {
-		$scope.searchList = data;
-	});
-	};
-	$scope.viewBlog = function(blogId){
-		ListBlog.getComments(blogId).then(function(data) {
-			$scope.blog = data;
+
+		ListBlog.searchBlogs($scope.searchString).then(function(data) {
+			$scope.searchList = data;
+			console.log($scope.searchList);
 		});
+		  $("#commentForm").hide();
+		  $("#view_blog").hide();
+		  $("#display_blogs").hide();
+		  $("#search_blogs").show();  
+		  $("#greet_user").show();
+		  	$("#LogoutTab").show();
+		  	$("#HomeTab").show();
+		  	$("#blogForm").show();
+		  	$("#chatForm").show();
+		  	$("#LoginTab").hide();
+		  	$("#RegisterTab").hide();
+		  	$("#searchForm").show();
 	};
-	*/
+	
+	$scope.viewBlog = function(blogId){
+
+		ListBlog.viewBlog(blogId).then(function(data) {
+			$scope.blogItem = data;
+		});
+		ListBlog.getComments(blogId).then(function(data) {
+			$scope.blogComments = data;
+		});
+		console.log($scope.blogItem);
+		console.log($scope.blogComments);
+		 $("#view_blog").show();
+		  $("#commentForm").show();
+		  $("#display_blogs").hide();
+		  $("#search_blogs").hide();
+		  $("#greet_user").show();
+		  	$("#LogoutTab").show();
+		  	$("#HomeTab").show();
+		  	$("#blogForm").show();
+		  	$("#chatForm").show();
+		  	$("#LoginTab").hide();
+		  	$("#RegisterTab").hide();
+		  	$("#searchForm").show();
+	};
+	
 	}
 ]);
 
@@ -52,8 +87,8 @@ blogApp.service('ListBlog', ['$http',function($http){
 		return promise;
 	}
 	
-	this.searchBlogs = function(){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/search/blog')
+	this.searchBlogs = function(searchString){
+		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/search/' + searchString)
 							.then(function(response){
 								return response.data;
 							},function(response){
@@ -62,8 +97,8 @@ blogApp.service('ListBlog', ['$http',function($http){
 		return promise;
 	}
 	
-	this.viewBlog = function(){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/search/blog')
+	this.viewBlog = function(blogId){
+		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/view/' + blogId)
 							.then(function(response){
 								return response.data;
 							},function(response){
@@ -93,7 +128,38 @@ $(document).ready(function() {
 	var logged_user = ''
 	var category = ''
 	var display_name = ''
-	
+		  /*
+		  $("#search").click(function(event){
+			  event.preventDefault();
+			  $("#commentForm").hide();
+			  $("#view_blog").hide();
+			  $("#display_blogs").hide();
+			  $("#search_blogs").show();
+			  $("#greet_user").show();
+			  	$("#LogoutTab").show();
+			  	$("#HomeTab").show();
+			  	$("#blogForm").show();
+			  	$("#chatForm").show();
+			  	$("#LoginTab").hide();
+			  	$("#RegisterTab").hide();
+			  	$("#searchForm").show();
+		  });
+		  $("#viewBlog").click(function(event){
+			  event.preventDefault();
+			 $("#view_blog").show();
+			  $("#commentForm").show();
+			  $("#display_blogs").hide();
+			  $("#search_blogs").hide();
+			  $("#greet_user").show();
+			  	$("#LogoutTab").show();
+			  	$("#HomeTab").show();
+			  	$("#blogForm").show();
+			  	$("#chatForm").show();
+			  	$("#LoginTab").hide();
+			  	$("#RegisterTab").hide();
+			  	$("#searchForm").show();
+		  });
+		  */
 	$("#login").click(function(event) {
 	      event.preventDefault();
 	      $("resMsg").empty();
@@ -139,7 +205,9 @@ $(document).ready(function() {
 		  $("#display_messages").hide();
 		  $("#LogoutTab").hide();
 		  $("#HomeTab").hide();
+		  $("#search_blogs").html("");
 		  $("#search_blogs").hide();
+		  $("#searchForm").hide();
 		  logged_user = ''
 		  category = ''
 		  display_name = ''
@@ -150,8 +218,12 @@ $(document).ready(function() {
 		  $("#blogForm").show();
 		  $("#chatForm").show();
 		  $("#commentForm").hide();
+		  $("#view_blog").html("");
 		  $("#view_blog").hide();
+		  $("#search_blogs").html("");
 		  $("#search_blogs").hide();
+		  $("#display_blogs").show();
+		  $("#searchForm").show();
 		  //showBlogs(logged_user, category);
 		  //showMessages();
 		  
@@ -190,21 +262,8 @@ $(document).ready(function() {
 				}
 			});
 	  }*/
-	  
-	  $("#search").click(function(event){
-		  event.preventDefault();
-		  $("#commentForm").hide();
-		  $("#view_blog").hide();
-		  $("#display_blogs").hide();
-		  $("#search_blogs").show();
-		  $("#greet_user").show();
-		  	$("#LogoutTab").show();
-		  	$("#HomeTab").show();
-		  	$("#blogForm").show();
-		  	$("#chatForm").show();
-		  	$("#LoginTab").hide();
-		  	$("#RegisterTab").hide();
-	  });
+
+	  /*
 	  $("#search").click(function(event){
 		  var searchString = $("#searchString").val();
 		  $.ajax({
@@ -222,8 +281,8 @@ $(document).ready(function() {
 					            trHTML += '<tr><td><span style="font-weight:bold">' + response[i].blogHeading + '</span></td><td><span style="font-weight:italic"> <tab1>-by ' + response[i].userName + '</tab1></span></td><td align="right">' + humanTime + '</td></tr><tr><td>' + response[i].blogString + '</td></tr><br/>';
 							  	
 						  });
-						  /*topCat += '<li id="LoginTab"><a href="#Login" id="login"  class="top_tab">Login</a></li>'
-						  */
+						  //topCat += '<li id="LoginTab"><a href="#Login" id="login"  class="top_tab">Login</a></li>'
+						 
 						  
 						  	
 					        $("#search_blogs").html(trHTML);
@@ -237,6 +296,7 @@ $(document).ready(function() {
 					  }
 			})
 	  });
+	  */
 	  $("#Register").click(function(event){
 		  	event.preventDefault();
 			var password = $("#password").val();
@@ -301,14 +361,15 @@ $(document).ready(function() {
 					  	$("#RegisterTab").hide();
 					  	$("#view_blog").hide();
 						$("#commentForm").hide();
-						$("#search_blogs").hide();
 						$("#search_form").show();
 					  	//showBlogs(email, response.interestCategory);
 					  	//showMessages();
 						$("#display_blogs").show();
 						$("#display_top_blogs").show();
 						$("#display_messages").show();
-						
+						$("#search_blogs").hide();
+						$("#view_blog").hide();
+						$("#searchForm").show();
 						token = '';
 						//var token = jwt.encode(data, JWT_SECRET);
 					

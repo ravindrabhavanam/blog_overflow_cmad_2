@@ -28,12 +28,13 @@ href='blog.css'/>
   		<li id="searchForm">
   		<div ng-controller="BlogListController">
   		<!-- <input class="button" type="submit" id="Search" value="Search"></li> -->
-  		 <form ng-submit='searchBlogs()' id='search_form' class="search_form">
-			 <!-- <input ng-model="searchString" > -->
-			 <input type='text' id='searchString' name='searchString placeholder='Search Blogs'>
-			 <input class="button" type="submit" id="search" value="search">
+  		 <!-- <form ng-submit='searchBlogs()' id='search_form' class="search_form"> -->
+			 <input ng-model="searchString" >
+			 <!--<input type='text' id='searchString' name='searchString placeholder='Search Blogs'>  -->
+			 <!-- <input class="button" type="submit" id="search" value="search"> -->
 			 <!--  <a href="#Search" id="search" class="top_tab">Search</a>-->
-		</form>
+			 <button ng-click="searchBlogs()" id="search">Search</button>
+		
 		</li>
 		</div>
 	</ul>
@@ -141,74 +142,80 @@ href='blog.css'/>
     	</table>
      </form>
      </div>
-	 <br>
-	 
-	 <table class="transparant" ng-controller="BlogListController">
-	 
-	 <td class ="top_cat" id="display_top_blogs">
-	 <!-- <tr ng-repeat='blog in blogList'> -->
-	 <tr>
-	 <ul>
-	
-	 <li> 
-	 <!-- <a ng-href='#' id="view_blog" ng-click='viewBlog(blog.blogId)' >{{blog.blogHeading}}</a> -->
-	 <input class='button' id="view_blog" ng-click='viewBlog(blog.blogId)' name='{{blog.blogHeading}}' value='{{blog.blogHeading}}' >
-	 </li><br/>
-	 </ul>
-	 </tr>
-	 </td>
-	 
-	 
-	 <td class="blogs" id="display_blogs">
-	 <tr ng-repeat='blog in blogList'>
-	 <td><span style="font-weight:bold">{{blog.blogHeading}}</span></td>
-	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
-	 <!-- <script>var humanTime =''</script>
-	 <td align="right">{{humanTime}}</td> -->
 	 <br/>
-	 <td>{{blog.blogString}}</td>
-	 </tr><br/>						  	
-	 </td>
 	 
-	 <td class="blogs" id="search_blogs">
-	 <!-- 
-	 <tr ng-repeat='blog in searchList'>
-	 <td><span style="font-weight:bold">{{blog.blogHeading}}</span></td>
-	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
-	 <td align="right">{{humanTime}}</td><br/>
-	 <td>{{blog.blogString}}</td>
-	 </tr><br/>		 
-	 -->				  	
-	 </td>
-	 
-				        
-	 <td class="msg" id="view_message">
-	 </td>
-	 
-	 <td class="msgs" id="display_messages">
-	 <tr ng-repeat='message in messageList'>
-	 <td><span style="font-weight:bold">{{message.userName }}</span></td>
-	 <!-- <script>var humanTime =''</script>
-	 <td align="right">{{humanTime}}</td> -->
-	 <br/> 
-	 <td>{{message.message}}</td>
-	 </tr><br/>
 	
+	 <table class ="top_cat" id="display_top_blogs" ng-controller="BlogListController">
+	 <tr ng-repeat='blog in blogList' >
+	 <td>
+
+	 <!-- <a ng-href='#' id="view_blog" ng-click='viewBlog(blog.blogId)' >{{blog.blogHeading}}</a> -->
+	 <a ng-click='viewBlog(blog.id)'>{{blog.blogHeading}}</a>
+
+	 </td>
 	 </tr>
 	 </table>
 	 
+	 <table class="blogs" id="display_blogs" ng-controller="BlogListController">
+	 <tr ng-repeat='blog in blogList'>
+	 <td><span style="font-weight:bold">
+	 <a ng-click='viewBlog(blog.id)'>{{blog.blogHeading}}</a>
+	 </span></td>
+	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
+	 <!-- <script>var humanTime =''</script>
+	 <td align="right">{{humanTime}}</td> -->
+	 
+	 <td>{{blog.blogString}}</td>
+	 </tr>					  	
+	 </table>
+	
+	 <table class="search_blogs" id="search_blogs" ng-controller="BlogListController">
+	 <tr ng-repeat='sblog in searchList'>
+	 <td><span style="font-weight:bold">
+     <a ng-click='viewBlog(blog.id)'>{{blog.blogHeading}}</a>
+     </span></td>
+	 <td><span style="font-weight:italic"> <tab1>-by {{sblog.userName}}</tab1></span></td>
+	 <!-- <td align="right">{{humanTime}}</td> -->
+	 
+	 <td>{{sblog.blogString}}</td>
+	 </tr>	 				  	
+	 </table>
+	 
+				        
+	 <table class="view_blog" id="view_blog" ng-controller="BlogListController">
+	 <!-- <td><span style="font-weight:bold">{{blogItem.blogHeading}}</span></td>
+	 <td><span style="font-weight:italic"> <tab1>-by {{blogItem.userName}}</tab1></span></td>
+	 <td>{{blogItem.blogString}}</td>
+	 -->
+	 <!-- <td align="right">{{humanTime}}</td> -->
+	 <tr ng-repeat='comment in blogComments'>
+	 <td>{{comment.comment}}</td>
+	 </tr>
+	 </table>
+	 
+	 <div id="chatForm" class="chat_form">
+	    <form id="Chat-form" method="post">
+	    <input type="text" size="30" id='chat' name="chat" placeholder="Type a message!"/>
+	    <input class="button" type="submit" id="chat_box" value="Send">
+	    </form>
+	 </div>
+	 <br/>
+	 <table class="msgs" id="display_messages" ng-controller="BlogListController">
+	 <tr ng-repeat='message in messageList'>
+	 <td><span style="font-weight:bold">{{message.userName }}</span></td>
+	 <!-- <script>var humanTime =''</script>
+	 <td align="right">{{humanTime}}</td> --> 
+	 <td>{{message.message}}</td>
+	 </tr>
+	 </table>
+	 <br/>
 	 <div id="commentForm" class="comment_form">
 	    <form id="Comment-form" method="post">
 	    <input type="text" size="100" id='comment' name="comment" placeholder="Type a comment"/>
 	    <input class="button" type="submit" id="comment_box" value="Comment">
 	    </form>
 	  </div>
-	 <div id="chatForm" class="chat_form">
-	    <form id="Chat-form" method="post">
-	    <input type="text" size="40" id='chat' name="chat" placeholder="Type a message!"/>
-	    <input class="button" type="submit" id="chat_box" value="Send">
-	    </form>
-	  </div>
+
 	
 </body>
 </html>
