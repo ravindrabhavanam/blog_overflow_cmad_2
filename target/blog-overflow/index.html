@@ -26,17 +26,18 @@ href='blog.css'/>
   		<li id="RegisterTab"><a href="#Register" id="register"  class="top_tab">Register</a></li>
   		<li id="HomeTab"><a href="#Home" id="home" class="top_tab">Home</a></li>
   		<li id="searchForm">
-  		<div ng-controller="BlogListController">
+  		<form ng-submit=searchBlogs() ng-controller="BlogListController">
   		<!-- <input class="button" type="submit" id="Search" value="Search"></li> -->
   		 <!-- <form ng-submit='searchBlogs()' id='search_form' class="search_form"> -->
-			 <input ng-model="searchString" >
+			 <input type="text" name="searchString" ng-model="searchString" >
 			 <!--<input type='text' id='searchString' name='searchString placeholder='Search Blogs'>  -->
 			 <!-- <input class="button" type="submit" id="search" value="search"> -->
 			 <!--  <a href="#Search" id="search" class="top_tab">Search</a>-->
-			 <button ng-click="searchBlogs()" id="search">Search</button>
+			 <!-- <button ng-click="searchBlogs()" id="search">Search</button> -->
+		<input type="submit" id="submit" value="Search" />
 		
+		</form>
 		</li>
-		</div>
 	</ul>
 
 
@@ -172,7 +173,7 @@ href='blog.css'/>
 	 <table class="search_blogs" id="search_blogs" ng-controller="BlogListController">
 	 <tr ng-repeat='sblog in searchList'>
 	 <td><span style="font-weight:bold">
-     <a ng-click='viewBlog(blog.id)'>{{blog.blogHeading}}</a>
+     <a ng-click='viewBlog(sblog.id)'>{{sblog.blogHeading}}</a>
      </span></td>
 	 <td><span style="font-weight:italic"> <tab1>-by {{sblog.userName}}</tab1></span></td>
 	 <!-- <td align="right">{{humanTime}}</td> -->

@@ -22,7 +22,7 @@ blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope,
 
 		ListBlog.searchBlogs($scope.searchString).then(function(data) {
 			$scope.searchList = data;
-			console.log($scope.searchList);
+			console.log(this.searchList);
 		});
 		  $("#commentForm").hide();
 		  $("#view_blog").hide();
@@ -40,14 +40,14 @@ blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope,
 	
 	$scope.viewBlog = function(blogId){
 
-		ListBlog.viewBlog(blogId).then(function(data) {
+		ListBlog.viewBlog(this.blogId).then(function(data) {
 			$scope.blogItem = data;
 		});
-		ListBlog.getComments(blogId).then(function(data) {
+		ListBlog.getComments(this.blogId).then(function(data) {
 			$scope.blogComments = data;
 		});
-		console.log($scope.blogItem);
-		console.log($scope.blogComments);
+		console.log(this.blogItem);
+		console.log(this.blogComments);
 		 $("#view_blog").show();
 		  $("#commentForm").show();
 		  $("#display_blogs").hide();
