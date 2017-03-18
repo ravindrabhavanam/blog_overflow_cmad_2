@@ -5,10 +5,12 @@
 <title>BLOG OVERFLOW </title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> -->
 
 <script src="angular.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script> -->
 <script type="text/javascript" src='angularBlog.js'></script>
+
 <link rel='stylesheet' 
 href='blog.css'/>
 </head>
@@ -35,8 +37,9 @@ href='blog.css'/>
 			 <!--  <a href="#Search" id="search" class="top_tab">Search</a>-->
 			 <!-- <button ng-click="searchBlogs()" id="search">Search</button> -->
 		<input type="submit" id="submit" value="Search" />
-		
+		<!-- <div ng-if='showAddLeg'><div ng-include='addLegTemplate'/></div> -->
 		</form>
+		
 		</li>
 	</ul>
 
@@ -169,9 +172,10 @@ href='blog.css'/>
 	 <td>{{blog.blogString}}</td>
 	 </tr>					  	
 	 </table>
-	
+	 
 	 <table class="search_blogs" id="search_blogs" ng-controller="BlogListController">
-	 <tr ng-repeat='sblog in searchList'>
+	 <!-- <table ng-controller="BlogListController"> -->
+	 <tr ng-repeat='sblog in searchList ()'>
 	 <td><span style="font-weight:bold">
      <a ng-click='viewBlog(sblog.id)'>{{sblog.blogHeading}}</a>
      </span></td>
@@ -181,15 +185,14 @@ href='blog.css'/>
 	 <td>{{sblog.blogString}}</td>
 	 </tr>	 				  	
 	 </table>
-	 
 				        
 	 <table class="view_blog" id="view_blog" ng-controller="BlogListController">
-	 <!-- <td><span style="font-weight:bold">{{blogItem.blogHeading}}</span></td>
-	 <td><span style="font-weight:italic"> <tab1>-by {{blogItem.userName}}</tab1></span></td>
-	 <td>{{blogItem.blogString}}</td>
-	 -->
+	  <td><span style="font-weight:bold">{{blogItem ().blogHeading}}</span></td>
+	 <td><span style="font-weight:italic"> <tab1>-by {{blogItem ().userName}}</tab1></span></td>
+	 <td>{{blogItem ().blogString}}</td>
+	 
 	 <!-- <td align="right">{{humanTime}}</td> -->
-	 <tr ng-repeat='comment in blogComments'>
+	 <tr ng-repeat='comment in blogComments ()'>
 	 <td>{{comment.comment}}</td>
 	 </tr>
 	 </table>

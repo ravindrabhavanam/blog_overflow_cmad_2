@@ -1,10 +1,12 @@
 //var jwt = require('jwt-simple');
 var JWT_SECRET = 'cmad';
 var blogApp = angular.module('blogApp', []);
-blogApp.controller('BlogListController' );
+blogApp.controller('BlogListController');
+blogApp.controller('SearchController');
 
 
-blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope, ListBlog) {
+
+blogApp.controller('BlogListController', [ '$scope','ListBlog','searchList', 'blogView', function ($scope, ListBlog, searchList, blogView) {
 	
 	ListBlog.getBlogs().then(function(data) {
 		$scope.blogList = data;
@@ -15,14 +17,21 @@ blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope,
 	ListBlog.getComments().then(function(data) {
 		$scope.commentList = data;
 	});
-	$scope.searchList = [];
-	$scope.blogComments = [];
+	
+	$scope.searchList = searchList.getSearchList;
+	$scope.blogComments = blogView.getBlogComments;
+	$scope.blogItem = blogView.getBlogItem;
 	
 	$scope.searchBlogs = function(){
-
+		$scope.showAddLeg=true;
+		console.log($scope.searchString);
 		ListBlog.searchBlogs($scope.searchString).then(function(data) {
-			$scope.searchList = data;
-			console.log(this.searchList);
+			ListBlog.searchList = data;
+			this.searchList = data;
+			searchList.setSearchList(data);
+			//searchList.searchList = data;
+			//console.log($scope.searchList);
+			
 		});
 		  $("#commentForm").hide();
 		  $("#view_blog").hide();
@@ -39,15 +48,19 @@ blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope,
 	};
 	
 	$scope.viewBlog = function(blogId){
-
-		ListBlog.viewBlog(this.blogId).then(function(data) {
+		console.log(blogId);
+		ListBlog.viewBlog(blogId).then(function(data) {
 			$scope.blogItem = data;
+			ListBlog.blogItem = data;
+			blogView.setBlogItem(data);
 		});
-		ListBlog.getComments(this.blogId).then(function(data) {
+		ListBlog.getComments(blogId).then(function(data) {
 			$scope.blogComments = data;
+			ListBlog.blogComments = data;
+			blogView.setBlogComments(data);
 		});
-		console.log(this.blogItem);
-		console.log(this.blogComments);
+		console.log(ListBlog.blogItem);
+		console.log(ListBlog.blogComments);
 		 $("#view_blog").show();
 		  $("#commentForm").show();
 		  $("#display_blogs").hide();
@@ -64,11 +77,50 @@ blogApp.controller('BlogListController', [ '$scope','ListBlog',function ($scope,
 	
 	}
 ]);
+blogApp.controller('SearchController', function ($scope, searchList) {
+	$scope.searchList = searchList.getSearchList;
+});
+blogApp.service('searchList', function(){
+	  var searchList = [];
+	  return {
 
+	        getSearchList: function() {
+	            return searchList;
+	        },
+	        setSearchList: function(list) {
+	        	searchList = list;
+	        }
+	    };
+	});
+blogApp.controller('BlogViewController', function ($scope, blogView) {
+    $scope.blogItem = blogView.getBlogItem;
+    $scope.blogComments = blogView.getBlogComments;
+});
+blogApp.service('blogView', function(){
+    var blogItem = {};
+    var blogComments = [];
+    return {
+
+          getBlogItem: function() {
+              return blogItem;
+          },
+          setBlogItem: function(blog) {
+              blogItem = blog;
+          },
+          getBlogComments: function() {
+              return blogComments;
+          },
+          setBlogComments: function(list) {
+              blogComments = list;
+          }
+      };
+  });
 blogApp.service('ListBlog', ['$http',function($http){
-	
+	this.searchList = [];
+	this.blogItem = {};
+	this.blogComments = [];
 	this.getBlogs = function(){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/category/cmad')
+		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/category/' + category)
 							.then(function(response){
 								return response.data;
 							},function(response){
@@ -218,9 +270,9 @@ $(document).ready(function() {
 		  $("#blogForm").show();
 		  $("#chatForm").show();
 		  $("#commentForm").hide();
-		  $("#view_blog").html("");
+		  //$("#view_blog").html("");
 		  $("#view_blog").hide();
-		  $("#search_blogs").html("");
+		  //$("#search_blogs").html("");
 		  $("#search_blogs").hide();
 		  $("#display_blogs").show();
 		  $("#searchForm").show();
