@@ -1,7 +1,11 @@
 
 #registerForm,#blogForm,#chatForm,#commentForm,#greet_user,#LogoutTab,#HomeTab,#searchForm{
-    display:none;
+	    display:none;
 }
+/*
+#display_top_blogs,#display_blogs,#search_blogs,#view_blog,#display_messages{
+    display:none;
+}*/
 div.background {
 	background: url(blog_cloud.bmp) repeat;
 	border: 2px solid black;
@@ -15,8 +19,8 @@ header, footer {
 }
 textarea{ 
 	align: center;
-	width: 1200px;
- 	height: 100px;
+	width: 1390px;
+ 	height: 60px;
  }
 .blog_form {
 	opacity: 0.8;
@@ -34,11 +38,7 @@ textarea{
 	background-color : #c0c0c0;
 	float: right;
 }
-.comment_form{
-	opacity: 0.8;
-	height: 30px;
-	background-color : #c0c0c0;
-}
+
 .search_form{
 	opacity: 0.8;
 	background-color : #c0c0c0;
@@ -116,7 +116,7 @@ nav ul a {
 	align: left;
 	display: block;
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -182,9 +182,9 @@ li a:hover {
   border-radius: 2px;
 	display:none;
 	background-color: #B8DDA5;
-	height: 600px;
+	height: 640px;
     float: left;
-    width: 250px;
+    width: 230px;
     padding: 1em;
     /*width: 20%;*/
 	overflow: auto;
@@ -199,14 +199,15 @@ li a:hover {
 	float: left;
 	background-color: #B8DDA5;
 	height: 600px;
-	display:none;
-	
-	width: 800px;
+	display:block;
+	width: 750px;
     /*margin-left: 60px;*/
     /*border-left: 1px solid gray;*/
     padding: 1em;
-    overflow: auto;
-    overflow-y: auto;
+    /*overflow: auto;*/
+    overflow-y: scroll;
+    
+    td {display: inline-block; }
 }
 .search_blogs {
 	opacity: 0.8;
@@ -217,14 +218,15 @@ li a:hover {
 	float: left;
 	background-color: #B8DDA5;
 	height: 600px;
-	display:none;
+	display:block;
 	
-	width: 800px;
+	width: 750px;
     /*margin-left: 60px;*/
     /*border-left: 1px solid gray;*/
     padding: 1em;
-    overflow: auto;
-    overflow-y: auto;
+    /*overflow: auto;*/
+    overflow-y: scroll;
+    td {display: inline-block; }
 }
 .view_blog {
 	opacity: 0.8;
@@ -235,14 +237,15 @@ li a:hover {
 	float: left;
 	background-color: #B8DDA5;
 	height: 600px;
-	display:none;
+	display:block;
 	
-	width: 800px;
+	width: 750px;
     /*margin-left: 60px;*/
     /*border-left: 1px solid gray;*/
     padding: 1em;
-    overflow: auto;
-    overflow-y: auto;
+    /*overflow: auto;*/
+    overflow-y: scroll;
+    td {display: inline-block; }
 }
 
 .msgs {
@@ -250,24 +253,26 @@ li a:hover {
   border: 4px solid rgb(40, 40, 40);
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-	display:none;
 	background-color: #B8DDA5;
-	height: 600px;
+	display:block;
+	height: 560px;
     float: right;
-    width: 350px;
+    width: 340px;
     /*width: 35%;*/
     /*width: 50%;*/
     /*border-left: 1px solid gray;*/
     padding: 1em;
     overflow: auto;
-    overflow-y: auto;
+    overflow-y: scroll;
+    
+    td {display: inline-block; }
 }
 .msg {
 	opacity: 0.8;
   border: 4px solid rgb(40, 40, 40);
   box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-	display:none;
+	display: none;
 	background-color: #B8DDA5;
 	/*height: 600px;*/
     float: right;
@@ -278,7 +283,46 @@ li a:hover {
     padding: 1em;
     overflow: auto;
     overflow-y: auto;
+    
+}
+.comment_form{
+	position: absolute;
+	left: 250px;
+	top: 1000px;
+    bottom: 0px;
+	opacity: 0.8;
+	height: 0px;
+	background-color : #c0c0c0;
+	float: right;
 }
 
-
 tab1 { padding-left: 4em; }
+/*table {
+  overflow-y: scroll;
+}*/
+
+/*
+#display_blogs  { display: block; }
+#display_blogs  td {display: inline-block; }
+
+
+#search_blogs  { display: block; }
+#search_blogs  td {display: inline-block; }
+
+
+#view_blog  { display: block; }
+#view_blog  td {display: inline-block; }
+
+table td {display: inline-block; }
+td { white-space:pre }
+tbody tr:nth-child(even){
+  background:#ECF0F1;
+}
+tbody tr:hover{
+background:#BDC3C7;
+  color:#FFFFFF;
+}
+.wrap table {
+    table-layout: fixed;
+}
+*/

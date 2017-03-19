@@ -29,17 +29,9 @@ href='blog.css'/>
   		<li id="HomeTab"><a href="#Home" id="home" class="top_tab">Home</a></li>
   		<li id="searchForm">
   		<form ng-submit=searchBlogs() ng-controller="BlogListController">
-  		<!-- <input class="button" type="submit" id="Search" value="Search"></li> -->
-  		 <!-- <form ng-submit='searchBlogs()' id='search_form' class="search_form"> -->
-			 <input type="text" name="searchString" ng-model="searchString" >
-			 <!--<input type='text' id='searchString' name='searchString placeholder='Search Blogs'>  -->
-			 <!-- <input class="button" type="submit" id="search" value="search"> -->
-			 <!--  <a href="#Search" id="search" class="top_tab">Search</a>-->
-			 <!-- <button ng-click="searchBlogs()" id="search">Search</button> -->
-		<input type="submit" id="submit" value="Search" />
-		<!-- <div ng-if='showAddLeg'><div ng-include='addLegTemplate'/></div> -->
+			<input type="text" name="searchString" ng-model="searchString" >
+			<input type="submit" id="submit" value="Search" />
 		</form>
-		
 		</li>
 	</ul>
 
@@ -101,15 +93,16 @@ href='blog.css'/>
 	 <nav id = nav2>
 	<div id="loginForm" class="login_page">
 	<div class="content">
-    <form id="login-form" method="post">
+    <!-- <form id="login-form" method="post" ng-submit=login() ng-controller="BlogListController"> -->
+    <form ng-submit=login() ng-controller="BlogListController">
     <table>
     <tr>
     	<td>Email:</td>
-  		<td  align="right"><input type="text" id='email1' name="email1" placeholder="Enter Username"><br/></td>
+  		<td  align="right"><input type="text" id='email1' name="email1" ng-model="email1" placeholder="Enter Username"><br/></td>
   		</tr>
   		<tr>
   		<td>Password:</td>
-  		<td  align="right"><input type="password" id='password1' name="password1" placeholder="Enter Password"><br/></td>
+  		<td  align="right"><input type="password" id='password1' name="password1" ng-model="password1" placeholder="Enter Password"><br/></td>
   		</tr>
   		<tr align="right">
   		<td></td>
@@ -128,97 +121,111 @@ href='blog.css'/>
 	
 	
 	<div id="blogForm" class="blog_form">
-	    <form id="Blog-form" method="post">
+	    <!-- <form id="Blog-form" method="post"> -->
+	    <form ng-submit=createBlog() ng-controller="BlogListController">
     <table>
     <tr>
-    	<th>Create Blog</th></tr>
+    	<th align="center">Create Blog</th></tr>
   		<tr>
-  		<td  align="center"><input type="text" size="80" id='blog' name="blog" placeholder="Give it a name!"><br/></td>
+  		<td align="center"><input type="text" size="80" ng-model='blogHeading' id='blog' name="blog" placeholder="Give it a name!"><br/></td>
   		</tr>
   		
   		<tr align="center">
-  		<td><textarea id='content' name="content" placeholder="Tell us what you know!"></textarea><br/></td>
+  		<td><textarea ng-model='blogString' id='content' name="content" placeholder="Tell us what you know!"></textarea><br/></td>
   		</tr>
   		<tr align="right">
-    	<td><input class="button" type="submit" id="blog_post" value="Post"></td>
-		<td><input class="button" type="submit" id="blog_clear" value="Cancel"></td>
+    	<td align="right"><input class="button" type="submit" id="blog_post" value="Post">
+		<input class="button" type="button" id="blog_clear" value="Cancel" ng-click=cancelEdit()></td>
     	</tr>
     	</table>
      </form>
+     <br/>
      </div>
-	 <br/>
+	 
 	 
 	
 	 <table class ="top_cat" id="display_top_blogs" ng-controller="BlogListController">
-	 <tr ng-repeat='blog in blogList' >
+	 <th><u>Latest 20 blogs</u></th>
+	 <tr ng-repeat="blog in allBlogList () | orderBy: '-timestamp' | limitTo:quantity " >
 	 <td>
-
 	 <!-- <a ng-href='#' id="view_blog" ng-click='viewBlog(blog.blogId)' >{{blog.blogHeading}}</a> -->
 	 <a ng-click='viewBlog(blog.id)'>{{blog.blogHeading}}</a>
-
 	 </td>
 	 </tr>
 	 </table>
 	 
 	 <table class="blogs" id="display_blogs" ng-controller="BlogListController">
-	 <tr ng-repeat='blog in blogList'>
+	 <tr ng-repeat="blog in allBlogList () | orderBy: '-timestamp'">
 	 <td><span style="font-weight:bold">
 	 <a ng-click='viewBlog(blog.id)'>{{blog.blogHeading}}</a>
 	 </span></td>
 	 <td><span style="font-weight:italic"> <tab1>-by {{blog.userName}}</tab1></span></td>
-	 <!-- <script>var humanTime =''</script>
-	 <td align="right">{{humanTime}}</td> -->
-	 
-	 <td>{{blog.blogString}}</td>
-	 </tr>					  	
+	 <!-- <script>var humanTime = unixTimeToHumanTime(blog.timestamp)</script> -->
+	
+	 <td colspan="3">{{blog.blogString}}</td>
+	 <td align="right">{{unixTimeToHumanTime(blog.timestamp)}}</td>
+	 </tr>			  	
 	 </table>
 	 
 	 <table class="search_blogs" id="search_blogs" ng-controller="BlogListController">
 	 <!-- <table ng-controller="BlogListController"> -->
-	 <tr ng-repeat='sblog in searchList ()'>
+	 <tr ng-repeat="sblog in searchBlogList () | orderBy: '-timestamp'">
 	 <td><span style="font-weight:bold">
      <a ng-click='viewBlog(sblog.id)'>{{sblog.blogHeading}}</a>
      </span></td>
 	 <td><span style="font-weight:italic"> <tab1>-by {{sblog.userName}}</tab1></span></td>
 	 <!-- <td align="right">{{humanTime}}</td> -->
 	 
-	 <td>{{sblog.blogString}}</td>
+	 <td colspan="3">{{sblog.blogString}}</td>
+	 <td align="right">{{unixTimeToHumanTime(sblog.timestamp)}}</td>
 	 </tr>	 				  	
 	 </table>
 				        
 	 <table class="view_blog" id="view_blog" ng-controller="BlogListController">
-	  <td><span style="font-weight:bold">{{blogItem ().blogHeading}}</span></td>
+	 <tr>
+	 <td><span style="font-weight:bold">{{blogItem ().blogHeading}}</span></td>
 	 <td><span style="font-weight:italic"> <tab1>-by {{blogItem ().userName}}</tab1></span></td>
-	 <td>{{blogItem ().blogString}}</td>
-	 
-	 <!-- <td align="right">{{humanTime}}</td> -->
-	 <tr ng-repeat='comment in blogComments ()'>
+	 <td align="right">{{unixTimeToHumanTime(blogItem ().timestamp)}}</td>
+	 </tr>
+	 <tr>
+	 <td colspan="3">{{blogItem ().blogString}}</td>
+	 </tr>
+	 <tr>
+	 <td><b></b><u>{{blogComments ().length}} Comments</u></b></td>
+	 </tr>
+	 <tr><td> </td></tr>
+	 <tr ng-repeat="comment in blogComments () | orderBy: 'timestamp'">
 	 <td>{{comment.comment}}</td>
+	 <td><span style="font-weight:italic"> <tab1>-by {{comment.userName}}</tab1></span></td>
+	 <td align="right">{{unixTimeToHumanTime(comment.timestamp)}}</td>
 	 </tr>
 	 </table>
 	 
 	 <div id="chatForm" class="chat_form">
-	    <form id="Chat-form" method="post">
-	    <input type="text" size="30" id='chat' name="chat" placeholder="Type a message!"/>
+	    <!-- <form id="Chat-form" method="post"> -->
+	    <form ng-submit=createMessage() ng-controller="BlogListController">
+	    <input type="text" size="30" id='chat' name="chat" ng-model='message' placeholder="Type a message!"/>
 	    <input class="button" type="submit" id="chat_box" value="Send">
 	    </form>
 	 </div>
 	 <br/>
 	 <table class="msgs" id="display_messages" ng-controller="BlogListController">
-	 <tr ng-repeat='message in messageList'>
+	 <tr ng-repeat="message in messageList () | orderBy:'-timestamp'">
 	 <td><span style="font-weight:bold">{{message.userName }}</span></td>
 	 <!-- <script>var humanTime =''</script>
 	 <td align="right">{{humanTime}}</td> --> 
 	 <td>{{message.message}}</td>
+	 <td align="right">{{unixTimeToHumanTime(message.timestamp)}}</td>
 	 </tr>
 	 </table>
 	 <br/>
-	 <div id="commentForm" class="comment_form">
-	    <form id="Comment-form" method="post">
-	    <input type="text" size="100" id='comment' name="comment" placeholder="Type a comment"/>
+	<div id="commentForm" class="comment_form">
+	    <!-- <form id="Comment-form" method="post"> -->
+	    <form ng-submit=createComment() ng-controller="BlogListController" >
+	    <input type="text" size="90" id='comment' name="comment" ng-model='comment' placeholder="Type a comment"/>
 	    <input class="button" type="submit" id="comment_box" value="Comment">
 	    </form>
-	  </div>
+	</div>
 
 	
 </body>

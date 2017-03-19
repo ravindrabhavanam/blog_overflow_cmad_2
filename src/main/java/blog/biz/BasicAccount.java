@@ -45,6 +45,7 @@ public class BasicAccount implements Account {
 	public UserData loginUser(UserData user)
 			throws UserNotFoundException, InvalidPasswordException, InvalidDataException, UserException {
 		// TODO Add various checks for throwing exceptions
+		System.out.println(user.getEmailId());
 		if (user.getEmailId() == null || user.getEmailId().trim().length() == 0){
 			throw new InvalidDataException();
 		}

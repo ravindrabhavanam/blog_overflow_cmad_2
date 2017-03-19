@@ -35,7 +35,9 @@ public class AccountController {
 	public Response login(UserData user){
 		Account account = new BasicAccount();
 		UserData login_user = account.loginUser(user);
-		return Response.ok().entity(login_user).build();
+		return Response.ok().entity("{\"emailId\": \"" + login_user.getEmailId() + 
+				"\", \"interestCategory\": \"" + login_user.getInterestCategory() + 
+				"\", \"token\": \"fake-jwt-token\"}").build();
 	}
 
 	
