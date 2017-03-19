@@ -258,7 +258,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 		};
 		data = JSON.stringify(data);
 
-		var promise = $http.post('http://localhost:8080/blog-overflow/online/blogpost/create/' + logged_user, data, config)
+		var promise = $http.post('/blog-overflow/online/blogpost/create/' + logged_user, data, config)
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -280,7 +280,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 		};
 		data = JSON.stringify(data);
 
-		var promise = $http.post('http://localhost:8080/blog-overflow/online/blogpost/broadcast', data, config)
+		var promise = $http.post('/blog-overflow/online/blogpost/broadcast', data, config)
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -304,7 +304,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 		};
 		data = JSON.stringify(data);
 
-		var promise = $http.post('http://localhost:8080/blog-overflow/online/blogpost/comment/' + blogId, data, config)
+		var promise = $http.post('/blog-overflow/online/blogpost/comment/' + blogId, data, config)
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -314,7 +314,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 		
 	}
 	this.getBlogs = function(category){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/category/' + category)
+		var promise = $http.get('/blog-overflow/online/blogpost/category/' + category)
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -324,7 +324,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 	}
 
 	this.getMessages = function(){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/messages')
+		var promise = $http.get('/blog-overflow/online/blogpost/messages')
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -334,7 +334,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 	}
 
 	this.searchBlogs = function(searchString){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/search/' + searchString)
+		var promise = $http.get('/blog-overflow/online/blogpost/search/' + searchString)
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -344,7 +344,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 	}
 
 	this.viewBlog = function(blogId){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/view/' + blogId)
+		var promise = $http.get('/blog-overflow/online/blogpost/view/' + blogId)
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -353,7 +353,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 		return promise;
 	}
 	this.getComments = function(blogId){
-		var promise = $http.get('http://localhost:8080/blog-overflow/online/blogpost/comments/' + blogId)
+		var promise = $http.get('/blog-overflow/online/blogpost/comments/' + blogId)
 		.then(function(response){
 			return response.data;
 		},function(response){
