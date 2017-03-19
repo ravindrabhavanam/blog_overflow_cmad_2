@@ -233,7 +233,7 @@ blogApp.service('ListBlog', ['$http',function($http){
 				password : password
 		};
 		data = JSON.stringify(data);
-		var promise = $http.post('http://localhost:8080/blog-overflow/online/account/login', data, config)
+		var promise = $http.post('/blog-overflow/online/account/login', data, config)
 		.then(function(response){
 			return response.data;
 		},function(response){
@@ -615,7 +615,7 @@ $(document).ready(function() {
 				"interestCategory" :interestCategory 
 		};
 		$.ajax({
-			url : 'http://localhost:8080/blog-overflow/online/account/register',
+			url : '/blog-overflow/online/account/register',
 			type : 'post',
 			contentType : 'application/json',
 			data : JSON.stringify(data),
